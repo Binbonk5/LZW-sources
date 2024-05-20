@@ -3,19 +3,19 @@ using namespace std;
 
 
 vector<pair<int, char>> encoding(string s1)
-{   
-    
+{
+
     /*
       Nén xâu s1
-   */
-    cout << "Encoding\n"; 
-    unordered_map<string, int> table; 
+    */
+    cout << "Encoding\n";
+    unordered_map<string, int> table;
     string p = "";
     string c;
 
     int cnt = 0;
     vector<pair<int, char>> encode;
-    cout << "Input\tIndex\tString\n"; 
+    cout << "Input\tIndex\tString\n";
     for (int i = 0; i < s1.length(); i++) {
 
         /*
@@ -31,7 +31,7 @@ vector<pair<int, char>> encoding(string s1)
                 encode.push_back({0, s1[i]});
                 table[p] = cnt;
                 p = "";
-                cout << s1[i] << "\t" << cnt << "\t" <<"(0," << s1[i] << ')'<< endl;  
+                cout << s1[i] << "\t" << cnt << "\t" << "(0," << s1[i] << ')' << endl;
             }
         }
 
@@ -43,7 +43,7 @@ vector<pair<int, char>> encoding(string s1)
                 cnt++;
                 encode.push_back({table[p], s1[i]});
                 table[p + s1[i]] = cnt;
-                cout << p << "\t" << cnt << "\t" <<'(' << table[p] << ',' << s1[i] << ')'<< endl;  
+                cout << p << "\t" << cnt << "\t" << '(' << table[p] << ',' << s1[i] << ')' << endl;
                 p = "";
             }
         }
@@ -56,17 +56,17 @@ vector<pair<int, char>> encoding(string s1)
 }
 
 void decoding(vector<pair<int, char>> encode)
-{   
+{
     /*
         Giải nén chuỗi bị nén
     */
-    cout << "\nDecoding\n"; 
+    cout << "\nDecoding\n";
     string decode = "";
-    unordered_map<int,string> table;
+    unordered_map<int, string> table;
     int cnt = 0;
     for (auto i : encode) {
         /*
-            Với mỗi cặp bị nén ở dạng (vị trí p, kí tự c) ta chỉ cần lấy xâu đang ở vị trí p trong bảng rồi 
+            Với mỗi cặp bị nén ở dạng (vị trí p, kí tự c) ta chỉ cần lấy xâu đang ở vị trí p trong bảng rồi
             cộng thêm c là ra được 1 xâu con. Cứ làm như vậy cho tới hết.
         */
         if (i.first == 0) {
@@ -74,7 +74,7 @@ void decoding(vector<pair<int, char>> encode)
             decode += i.second;
             table[cnt] = i.second;
         }
-        else{
+        else {
             cnt++;
             decode += table[i.first] + i.second;
             table[cnt] = table[i.first] + i.second;
@@ -86,9 +86,12 @@ void decoding(vector<pair<int, char>> encode)
 int main()
 {
 
-    string s = "ABBCBCABABCAABCAAB";
+    freopen("test.inp", "r", stdin);
+    freopen("test.out", "w", stdout);
+    string s;
+    cin >> s;
     vector<pair<int, char>> encode;
     encode = encoding(s);
     decoding(encode);
-    
+
 }
