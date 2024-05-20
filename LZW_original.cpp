@@ -96,9 +96,12 @@ void decoding(vector<int> op)
    } 
    cout << endl;
 } 
-int main() 
-{ 
-   string s= "ABBCBCABABCAABCAAB";
+int main()  
+{  
+   freopen("test.inp", "r", stdin);
+   freopen("test.out", "w", stdout);
+   string s;
+   cin >> s;
    vector<int> output_code = encoding(s); 
    cout << "Output Codes are: "; 
    for (int i = 0; i < output_code.size(); i++) { 
